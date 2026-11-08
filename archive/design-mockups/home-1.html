@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- miaoda-super-design | title: 极简白 | skeleton: minimal-split-light | sig: 发丝分割线与抓取手柄 -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文本预览器 · 极简白</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        container: { center: true, padding: '2rem', screens: { '2xl': '1400px' } },
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
+            secondary: { DEFAULT: 'hsl(var(--secondary))', foreground: 'hsl(var(--secondary-foreground))' },
+            destructive: { DEFAULT: 'hsl(var(--destructive))', foreground: 'hsl(var(--destructive-foreground))' },
+            muted: { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
+            accent: { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
+            popover: { DEFAULT: 'hsl(var(--popover))', foreground: 'hsl(var(--popover-foreground))' },
+            card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' }
+          },
+          borderRadius: {
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+            sm: 'calc(var(--radius) - 4px)'
+          },
+          keyframes: {
+            /* ===== KEYFRAMES:BEGIN ===== */
+            /* ===== KEYFRAMES:END ===== */
+          },
+          animation: {
+            /* ===== ANIMATIONS:BEGIN ===== */
+            /* ===== ANIMATIONS:END ===== */
+          }
+        }
+      },
+      plugins: [
+        function ({ addVariant }) {
+          addVariant('intersect', '&:not([no-intersect])');
+        }
+      ]
+    };
+  </script>
+  <style>
+    /* ===== FONT-FACE:BEGIN ===== */
+    @font-face {
+      font-family: "HarmonyOSSans";
+      src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "HarmonyOSSans";
+      src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "HarmonyOSSans";
+      src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Source Han Mono SC";
+      src: url("https://resource-static.bj.bcebos.com/fonts-skill/SourceHanMonoSC-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-display: swap;
+    }
+    /* ===== FONT-FACE:END ===== */
+
+    /* ===== DESIGN-TOKENS:BEGIN ===== */
+    :root {
+      --radius: 0.75rem;
+      --background: 0 0% 100%;
+      --foreground: 0 0% 16%;
+      --card: 0 0% 100%;
+      --card-foreground: 0 0% 16%;
+      --primary: 0 0% 16%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 0 0% 96%;
+      --secondary-foreground: 0 0% 16%;
+      --muted: 0 0% 96%;
+      --muted-foreground: 0 0% 42%;
+      --accent: 0 0% 96%;
+      --accent-foreground: 0 0% 16%;
+      --destructive: 0 72% 48%;
+      --destructive-foreground: 0 0% 100%;
+      --border: 0 0% 90%;
+      --input: 0 0% 90%;
+      --ring: 0 0% 16%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 0 0% 16%;
+    }
+    /* ===== DESIGN-TOKENS:END ===== */
+
+    /* ===== CUSTOM-TOKENS:BEGIN ===== */
+    :root {
+      --font-sans: "HarmonyOSSans", system-ui, sans-serif;
+      --font-mono: "Source Han Mono SC", ui-monospace, monospace;
+    }
+    /* ===== CUSTOM-TOKENS:END ===== */
+
+    /* ===== SIGNATURE-CSS:BEGIN ===== */
+    * { scrollbar-width: thin; scrollbar-color: hsl(var(--border)) transparent; }
+    html, body { font-family: var(--font-sans); }
+    .font-mono { font-family: var(--font-mono); }
+    /* ===== SIGNATURE-CSS:END ===== */
+  </style>
+</head>
+<body class="bg-background text-foreground antialiased">
+  <div class="flex h-screen w-full flex-col">
+    <header class="flex h-14 shrink-0 items-center justify-between border-b border-border px-6">
+      <div class="flex items-center gap-3">
+        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-foreground))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 2v6h6"/>
+          </svg>
+        </div>
+        <div class="flex flex-col leading-tight">
+          <span class="text-sm font-semibold tracking-tight text-foreground">文本预览器</span>
+          <span class="text-xs text-muted-foreground">实时编辑 · 即时预览</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">128 字</span>
+        <button class="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:bg-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex min-h-0 flex-1">
+      <section id="editor" class="flex min-w-0 flex-1 flex-col bg-background">
+        <div class="flex h-10 shrink-0 items-center justify-between border-b border-border px-5">
+          <span class="text-xs font-medium uppercase tracking-wider text-muted-foreground">编辑区</span>
+          <span class="text-xs text-muted-foreground">Markdown</span>
+        </div>
+        <div class="min-h-0 flex-1 overflow-y-auto">
+          <textarea class="h-full w-full resize-none bg-transparent px-5 py-4 font-mono text-sm leading-relaxed text-foreground outline-none" readonly># 实时文本预览器
+
+左侧编辑，右侧即时预览，所见即所得。
+
+## 核心功能
+
+- 拖拽分割线调节面板宽度
+- 滚动或拖拽调节预览高度
+- 内容实时双向同步
+
+## 使用提示
+
+在左侧任意输入文本，右侧将实时呈现渲染效果，适合撰写技术文档与笔记。</textarea>
+        </div>
+      </section>
+
+      <div class="group relative flex w-px shrink-0 cursor-col-resize items-center justify-center bg-border">
+        <div class="absolute inset-y-0 -left-1 -right-1"></div>
+        <div class="flex h-10 w-5 items-center justify-center rounded-full bg-card shadow-sm ring-1 ring-border transition-colors group-hover:bg-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--muted-foreground))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/>
+            <circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/>
+          </svg>
+        </div>
+      </div>
+
+      <section id="preview" class="flex min-w-0 flex-1 flex-col bg-secondary/40">
+        <div class="flex h-10 shrink-0 items-center justify-between border-b border-border px-5">
+          <span class="text-xs font-medium uppercase tracking-wider text-muted-foreground">预览区</span>
+          <div class="flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--muted-foreground))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+            <span class="text-xs text-muted-foreground">拖拽调节高度</span>
+          </div>
+        </div>
+        <div class="relative min-h-0 flex-1 overflow-y-auto">
+          <div class="mx-auto max-w-prose px-6 py-6">
+            <h1 class="text-2xl font-bold tracking-tight text-foreground">实时文本预览器</h1>
+            <p class="mt-3 text-sm leading-relaxed text-muted-foreground">左侧编辑，右侧即时预览，所见即所得。</p>
+            <h2 class="mt-6 text-lg font-semibold text-foreground">核心功能</h2>
+            <ul class="mt-2 space-y-1.5 text-sm text-foreground">
+              <li class="flex items-start gap-2"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground"></span><span>拖拽分割线调节面板宽度</span></li>
+              <li class="flex items-start gap-2"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground"></span><span>滚动或拖拽调节预览高度</span></li>
+              <li class="flex items-start gap-2"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground"></span><span>内容实时双向同步</span></li>
+            </ul>
+            <h2 class="mt-6 text-lg font-semibold text-foreground">使用提示</h2>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">在左侧任意输入文本，右侧将实时呈现渲染效果，适合撰写技术文档与笔记。</p>
+          </div>
+          <div class="sticky bottom-0 flex h-1.5 w-full cursor-row-resize items-center justify-center bg-border/60">
+            <div class="h-1 w-10 rounded-full bg-muted-foreground/40"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- P4 丢弃以下全部 data-preview-only 脚本 -->
+  <script src="https://cdn.jsdelivr.net/npm/tailwindcss-intersect@2.2.0/dist/observer.min.js" data-preview-only></script>
+  <script type="module" data-preview-only>
+    import { animate, inView, scroll, stagger } from "https://cdn.jsdelivr.net/npm/motion@12.23.25/+esm";
+    Object.assign(window, { animate, inView, scroll, stagger });
+    document.dispatchEvent(new Event('motion:ready'));
+  </script>
+  <script data-preview-only>
+    document.addEventListener('motion:ready', () => {
+      const { animate, inView, scroll, stagger } = window;
+    });
+  </script>
+</body>
+</html>

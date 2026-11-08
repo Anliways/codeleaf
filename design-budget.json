@@ -1,0 +1,17 @@
+{
+  "clarified": true,
+  "clarify_reason": "用户已指定：代码/技术文档预览场景，苹果官网式纯白极简风格，纯白+#282828暗黑双主题，配色不超过3种（严格灰阶）。",
+  "snapshot": [],
+  "budget": 3,
+  "checked": [
+    "home-1.html",
+    "home-2.html",
+    "home-3.html"
+  ],
+  "round_open": false,
+  "sha": {
+    "home-1.html": "4654260a457c3581592b969e33d018ef24fbc4585e4df39304ff68bdf0209c42",
+    "home-2.html": "20830f335245513f03ca2f64a97cbe24c4a4506855d433535b17e393653ebd7b",
+    "home-3.html": "d96d1860bca7132a6d4490112653bdf2f8a961992cda47a72b63c767ff3320bc"
+  }
+}
