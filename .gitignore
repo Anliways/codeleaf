@@ -29,3 +29,4 @@ node_modules/.tmp/
 
 # WorkBuddy 项目数据（非项目源码）
 .workbuddy/
+.wbapp_*.genie
