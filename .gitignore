@@ -30,3 +30,6 @@ node_modules/.tmp/
 # WorkBuddy 项目数据（非项目源码）
 .workbuddy/
 .wbapp_*.genie
+
+# 本地数据备份（含用户数据，不入库）
+backups/
