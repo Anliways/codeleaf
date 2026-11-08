@@ -16,7 +16,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { PRESET_COLORS } from '@/lib/editor/constants';
-import { composeHex8, CHECKERBOARD_BG } from '@/lib/render';
+import { composeHex8, CHECKERBOARD_BG } from '@/lib/color';
 
 /**
  * 颜色选择器下拉

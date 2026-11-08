@@ -3,7 +3,7 @@ import { Minus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { composeHex8, CHECKERBOARD_BG } from '@/lib/render';
+import { composeHex8, CHECKERBOARD_BG } from '@/lib/color';
 import type { Align } from '@/lib/render';
 
 /**
