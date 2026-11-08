@@ -51,7 +51,7 @@ const PreviewCanvas: React.FC<PreviewCanvasProps> = ({
             </div>
             <p className="text-sm font-medium text-foreground">预览区等待内容</p>
             <p className="text-xs leading-relaxed text-muted-foreground">
-              在编辑区输入文本后，这里会实时渲染排版效果；右上角可将成品导出为 PNG 长图、Markdown 或 TXT 文件。
+              在编辑区输入文本后，这里会实时渲染排版效果；右上角可将成品导出为 PNG 长图。
             </p>
           </div>
         ) : (
