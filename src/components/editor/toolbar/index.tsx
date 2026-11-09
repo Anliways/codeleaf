@@ -111,11 +111,11 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
   const { hr } = props;
 
   return (
-    <div className="flex min-h-10 shrink-0 flex-wrap items-center gap-x-3 gap-y-1.5 overflow-visible border-b border-border px-3 py-1.5 md:px-5">
+    <div className="flex min-h-10 shrink-0 flex-nowrap items-center gap-x-3 gap-y-1.5 overflow-x-auto border-b border-border px-3 py-1.5 [scrollbar-width:none] md:flex-wrap md:overflow-visible md:px-5 [&::-webkit-scrollbar]:hidden">
       <span className="shrink-0 text-xs font-medium uppercase tracking-wider text-muted-foreground">
         编辑区
       </span>
-      <div className="flex min-w-0 flex-wrap items-center gap-1">
+      <div className="flex min-w-0 flex-nowrap items-center gap-1 md:flex-wrap">
         <ToolbarButton
           icon={<Undo2 className="h-3.5 w-3.5" />}
           tooltip="撤销（Ctrl/Cmd+Z）"

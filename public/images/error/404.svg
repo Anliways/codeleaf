@@ -1,0 +1,17 @@
+<svg width="240" height="140" viewBox="0 0 240 140" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="404 插图">
+  <!-- 浅色版 404 插图：断裂的代码行 + 一片叶子 -->
+  <g font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-weight="700">
+    <text x="12" y="86" font-size="64" fill="#cbd5e1">4</text>
+    <text x="158" y="86" font-size="64" fill="#cbd5e1">4</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M78 74 q14 -22 28 -6" />
+    <path d="M106 90 q16 12 30 -4" />
+  </g>
+  <!-- 叶子 -->
+  <g transform="translate(96 34) rotate(-18)">
+    <path d="M0 26 C0 8 14 -6 32 -8 C32 12 20 26 0 26 Z" fill="#22c55e"/>
+    <path d="M2 24 C10 16 20 8 29 -4" stroke="#16a34a" stroke-width="2" stroke-linecap="round" fill="none"/>
+  </g>
+  <text x="120" y="126" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="system-ui, sans-serif">页面走丢了</text>
+</svg>

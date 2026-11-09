@@ -1,7 +1,8 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import IntersectObserver from '@/components/common/IntersectObserver';
 import MobileGate from '@/components/common/MobileGate';
+import NotFound from '@/pages/NotFound';
 import { Toaster } from '@/components/ui/sonner';
 
 import { routes } from './routes';
@@ -27,7 +28,7 @@ const App: React.FC = () => {
                 element={route.element}
               />
             ))}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
         </div>

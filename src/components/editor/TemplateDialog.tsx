@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { LayoutTemplate, Loader2, Save, Trash2 } from 'lucide-react';
+import { CloudOff, LayoutTemplate, Loader2, Save, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import {
   Dialog,
@@ -58,6 +58,8 @@ const TemplateDialog: React.FC<TemplateDialogProps> = ({
   const [tab, setTab] = useState<'preset' | 'custom'>('preset');
   const [customs, setCustoms] = useState<CustomTemplate[]>([]);
   const [loading, setLoading] = useState(false);
+  // 云端服务不可用（后端暂停/网络异常）时的降级标记
+  const [backendError, setBackendError] = useState(false);
   const [saveName, setSaveName] = useState('');
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -68,8 +70,10 @@ const TemplateDialog: React.FC<TemplateDialogProps> = ({
     try {
       const list = await listCustomTemplates();
       setCustoms(list);
+      setBackendError(false);
     } catch {
-      toast.error('自定义模板加载失败，请稍后重试');
+      setBackendError(true);
+      toast.error('自定义模板加载失败：云端服务暂不可用，预设模板不受影响');
     } finally {
       setLoading(false);
     }
@@ -98,7 +102,7 @@ const TemplateDialog: React.FC<TemplateDialogProps> = ({
       setSaveName('');
       await refresh();
     } catch {
-      toast.error('保存失败，请稍后重试');
+      toast.error('保存失败：云端服务暂不可用，请稍后重试');
     } finally {
       setSaving(false);
     }
@@ -160,6 +164,18 @@ const TemplateDialog: React.FC<TemplateDialogProps> = ({
           </TabsContent>
 
           <TabsContent value="custom">
+            {/* 云端服务不可用时的降级说明 */}
+            {backendError && (
+              <div className="mb-3 flex items-start gap-2 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-600 dark:text-amber-400">
+                <CloudOff className="mt-0.5 h-4 w-4 shrink-0" />
+                <div>
+                  <p className="font-medium">云端模板服务暂时不可用</p>
+                  <p className="mt-0.5 text-amber-600/80 dark:text-amber-400/80">
+                    后端服务已暂停或网络异常，自定义模板的保存与同步暂无法使用；预设模板不受影响，可正常取用。
+                  </p>
+                </div>
+              </div>
+            )}
             {/* 保存当前编辑区内容（连同排版格式）为自定义模板 */}
             <div className="mb-3 flex items-center gap-2 rounded-lg border border-dashed border-border bg-muted/30 p-2">
               <Input
@@ -171,11 +187,12 @@ const TemplateDialog: React.FC<TemplateDialogProps> = ({
                 maxLength={50}
                 placeholder="输入模板名称，保存当前内容与排版格式"
                 className="h-8 flex-1 px-2 text-xs"
+                disabled={backendError}
               />
               <Button
                 size="sm"
                 className="h-8 shrink-0 gap-1.5 text-xs"
-                disabled={saving}
+                disabled={saving || backendError}
                 onClick={() => void handleSave()}
               >
                 {saving ? (
@@ -191,6 +208,13 @@ const TemplateDialog: React.FC<TemplateDialogProps> = ({
               {loading ? (
                 <div className="flex h-32 items-center justify-center text-muted-foreground">
                   <Loader2 className="h-5 w-5 animate-spin" />
+                </div>
+              ) : backendError ? (
+                <div className="flex h-32 flex-col items-center justify-center gap-1.5 text-center">
+                  <p className="text-sm text-muted-foreground">无法获取云端模板列表</p>
+                  <p className="text-xs text-muted-foreground/70">
+                    服务恢复后将自动显示已保存的模板
+                  </p>
                 </div>
               ) : customs.length === 0 ? (
                 <div className="flex h-32 flex-col items-center justify-center gap-1.5 text-center">

@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import { EditorSection } from '@/components/editor/EditorSection';
 import { PreviewSection } from '@/components/preview/PreviewSection';
 import { ViewSwitcher } from '@/components/common/ViewSwitcher';
+import ThemeToggle from '@/components/common/ThemeToggle';
 import TemplateDialog from '@/components/editor/TemplateDialog';
 import { useHistory } from '@/hooks/useHistory';
 import { useContainerScale } from '@/hooks/useContainerScale';
@@ -38,6 +39,18 @@ import type { TextTemplate } from '@/lib/templates';
 
 type ViewMode = 'split' | 'editor' | 'preview';
 
+/** 正文草稿的 localStorage 键名 */
+const DRAFT_STORAGE_KEY = 'codeleaf:draft';
+
+/** 启动时恢复上次编辑的草稿；存储不可用（隐私模式等）时回退默认文案 */
+const loadDraft = (): string => {
+  try {
+    return localStorage.getItem(DRAFT_STORAGE_KEY) ?? DEFAULT_TEXT;
+  } catch {
+    return DEFAULT_TEXT;
+  }
+};
+
 /**
  * 实时文本预览器主页面
  *  responsibilities:
@@ -48,7 +61,19 @@ type ViewMode = 'split' | 'editor' | 'preview';
 const TextPreviewer: React.FC = () => {
   // ---- 文本历史 ----
   const { state: text, set: setText, undo, redo, canUndo, canRedo } =
-    useHistory(DEFAULT_TEXT);
+    useHistory(loadDraft());
+
+  // ---- 草稿自动保存（防抖 500ms，避免每次击键都写 localStorage）----
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      try {
+        localStorage.setItem(DRAFT_STORAGE_KEY, text);
+      } catch {
+        // 存储不可用（隐私模式/配额满）时静默跳过，不影响编辑
+      }
+    }, 500);
+    return () => window.clearTimeout(timer);
+  }, [text]);
 
   // ---- 画布尺寸与预设 ----
   const [width, setWidth] = useState(375);
@@ -71,8 +96,19 @@ const TextPreviewer: React.FC = () => {
   const [viewAnim, setViewAnim] = useState<'fade' | 'from-left' | 'from-right'>('fade');
   const isMobile = useIsMobile();
 
+  // 断点切换时自动调整视图：进入窄屏强制单栏；回到宽屏时若此前是被强制切栏的，则恢复分栏
+  // 初始值与首帧视图逻辑保持一致（窄屏首帧即进入 editor 视图，视为被强制）
+  const viewAutoForcedRef = useRef(
+    typeof window !== 'undefined' && window.innerWidth < 768,
+  );
   useEffect(() => {
-    if (isMobile && viewMode === 'split') setViewMode('editor');
+    if (isMobile && viewMode === 'split') {
+      setViewMode('editor');
+      viewAutoForcedRef.current = true;
+    } else if (!isMobile && viewAutoForcedRef.current && viewMode === 'editor') {
+      viewAutoForcedRef.current = false;
+      setViewMode('split');
+    }
   }, [isMobile, viewMode]);
 
   // ---- 格式化滑块状态 ----
@@ -451,6 +487,7 @@ const TextPreviewer: React.FC = () => {
           </div>
         </div>
         <div className="flex shrink-0 items-center gap-1.5 md:gap-2">
+          <ThemeToggle />
           <ViewSwitcher mode={viewMode} onSwitch={switchView} />
           <span className="whitespace-nowrap rounded-full bg-secondary px-2.5 py-1 font-mono text-xs font-medium text-secondary-foreground md:px-3">
             {charCount} 字

@@ -42,6 +42,13 @@ import {
   CATEGORY_LABELS,
 } from '@/lib/presets';
 
+/** 预设选项文案：名称本身已是尺寸描述（如"1024 × 768"）时不再重复显示尺寸 */
+const presetLabel = (p: DevicePreset): string => {
+  const dims = `${p.width}×${p.height}`;
+  const nameHasDims = p.name.replace(/\s/g, '') === dims;
+  return `${nameHasDims ? p.name : `${p.name} · ${dims}`}${p.ratio ? ` · ${p.ratio}` : ''}`;
+};
+
 const CATEGORY_ICONS: Record<PresetCategory, React.ElementType> = {
   phone: Smartphone,
   foldable: FoldHorizontal,
@@ -239,8 +246,7 @@ const DimensionControls: React.FC<DimensionControlsProps> = ({
                 </SelectLabel>
                 {items.map((p) => (
                   <SelectItem key={p.id} value={p.id} className="font-mono text-xs">
-                    {p.name} · {p.width}×{p.height}
-                    {p.ratio ? ` · ${p.ratio}` : ''}
+                    {presetLabel(p)}
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -254,7 +260,7 @@ const DimensionControls: React.FC<DimensionControlsProps> = ({
               </SelectLabel>
               {customs.map((p) => (
                 <SelectItem key={p.id} value={p.id} className="font-mono text-xs">
-                  {p.name} · {p.width}×{p.height}
+                  {presetLabel(p)}
                 </SelectItem>
               ))}
             </SelectGroup>

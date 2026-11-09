@@ -1,0 +1,305 @@
+- generic:
+  - generic:
+    - generic [aria-hidden]:
+      - main:
+        - generic:
+          - generic:
+            - generic: 编码叶 Codeleaf
+            - generic:
+              - generic:
+                - button:
+                  - generic: 分栏
+                - button:
+                  - generic: 编辑
+                - button:
+                  - generic: 预览
+              - generic: 654 字
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: 编辑区
+                    - generic:
+                      - button [disabled]
+                      - button [disabled]
+                      - button: 标题
+                      - button:
+                        - generic: B
+                      - button:
+                        - generic: I
+                      - button:
+                        - generic: U
+                      - button:
+                        - generic: S
+                      - generic:
+                        - button:
+                          - generic: x²
+                        - button:
+                          - generic: x₂
+                      - generic:
+                        - button: 颜色
+                        - button: 字号
+                      - generic:
+                        - button:
+                          - generic: 清除格式
+                      - button
+                      - button
+                      - generic:
+                        - button: 字距
+                        - button: 行距
+                      - button: 插入
+                      - button: 列表
+                      - generic:
+                        - button: 字体
+                        - button
+                      - button:
+                        - generic: 模版
+                      - button:
+                        - generic: 查找
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: "1"
+                        - generic: "2"
+                        - generic: "3"
+                        - generic: "4"
+                        - generic: "5"
+                        - generic: "6"
+                        - generic: "7"
+                        - generic: "8"
+                        - generic: "9"
+                        - generic: "10"
+                        - generic: "11"
+                        - generic: "12"
+                        - generic: "13"
+                        - generic: "14"
+                        - generic: "15"
+                        - generic: "16"
+                        - generic: "17"
+                        - generic: "18"
+                        - generic: "19"
+                        - generic: "20"
+                        - generic: "21"
+                        - generic: "22"
+                        - generic: "23"
+                        - generic: "24"
+                        - generic: "25"
+                        - generic: "26"
+                        - generic: "27"
+                        - generic: "28"
+                        - generic: "29"
+                        - generic: "30"
+                        - generic: "31"
+                        - generic: "32"
+                        - generic: "33"
+                        - generic: "34"
+                        - generic: "35"
+                        - generic: "36"
+                        - generic: "37"
+                        - generic: "38"
+                        - generic: "39"
+                        - generic: "40"
+                        - generic: "41"
+                        - generic: "42"
+                      - textbox: "# 实时文本预览器 左侧编辑，右侧即时预览，<b>所见即所得</b>。 ## Markdown 快捷解析 > 这是一段 Markdown 引用块：连续多行以 > 开头即可合并为引用样式， > 行内仍可混用 <b>加粗</b>、<color=#22C55E>颜色</color> 等富文本标签。 | 功能 | 语法 | 状态 | | :--- | :---: | ---: | | 引用块 | > 文本 | 已支持 | | 表格 | 竖线 + 分隔行 | 已支持 | | 代码块 | 三反引号围栏 | 已支持 | ```js // 代码块原样保留换行与缩进，内部不解析标签 function greet(name) { const msg = '你好, ' + name; console.log(msg); } ``` ## 高级排版 - <b>加粗</b>强调关键内容 - <i>倾斜</i>表达语气变化 - H<sub>2</sub>O 与 X<sup>3</sup> 展示上下标 - <spacing=3>宽字符间距效果</spacing> - <lh=2>更大的行距让段落呼吸</lh> ## 列表序号格式 1. 阿拉伯数字序号 i. 小写罗马数字 A. 大写字母序号 ★ 星形自定义符号 ○ 空心圆自定义符号 ## 使用提示 选中文本后点击工具栏按钮即可应用格式；「插入」菜单可一键插入表格、引用、任务列表等块级内容；预览区右上角可将排版结果导出为高清 PNG 长图。"
+              - separator
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: 预览区
+                    - generic:
+                      - generic: 375×667px · 69%
+                      - button:
+                        - generic: 紧凑表格
+                      - button: 导出 PNG
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: 宽度
+                        - generic:
+                          - spinbutton: "375"
+                          - generic: px
+                      - generic:
+                        - generic: 高度
+                        - generic:
+                          - spinbutton: "667"
+                          - generic: px
+                      - generic:
+                        - button:
+                          - generic: 自适应 · 69%
+                    - generic:
+                      - combobox:
+                        - generic: 1024 × 768 · 1024×768 · 4:3
+                      - button: 保存预设
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - generic: 实时文本预览器
+                                - generic: 左侧编辑，右侧即时预览，所见即所得。
+                                - generic: Markdown 快捷解析
+                                - blockquote:
+                                  - generic: 这是一段 Markdown 引用块：连续多行以 > 开头即可合并为引用样式，
+                                  - generic: 行内仍可混用 加粗、颜色 等富文本标签。
+                                - generic:
+                                  - table:
+                                    - rowgroup:
+                                      - row:
+                                        - columnheader: 功能
+                                        - columnheader: 语法
+                                        - columnheader: 状态
+                                    - rowgroup:
+                                      - row:
+                                        - cell: 引用块
+                                        - cell: "> 文本"
+                                        - cell: 已支持
+                                      - row:
+                                        - cell: 表格
+                                        - cell: 竖线 + 分隔行
+                                        - cell: 已支持
+                                      - row:
+                                        - cell: 代码块
+                                        - cell: 三反引号围栏
+                                        - cell: 已支持
+                                - generic:
+                                  - generic: js
+                                  - generic: "// 代码块原样保留换行与缩进，内部不解析标签 function greet(name) { const msg = '你好, ' + name; console.log(msg); }"
+                                  - button: 复制
+                                - generic: 高级排版
+                                - list:
+                                  - listitem:
+                                    - generic: 加粗强调关键内容
+                                  - listitem:
+                                    - generic: 倾斜表达语气变化
+                                  - listitem:
+                                    - generic: H2O 与 X3 展示上下标
+                                  - listitem:
+                                    - generic: 宽字符间距效果
+                                  - listitem:
+                                    - generic: 更大的行距让段落呼吸
+                                - generic: 列表序号格式
+                                - list:
+                                  - listitem:
+                                    - generic: "1."
+                                    - generic: 阿拉伯数字序号
+                                  - listitem:
+                                    - generic: i.
+                                    - generic: 小写罗马数字
+                                  - listitem:
+                                    - generic: A.
+                                    - generic: 大写字母序号
+                                  - listitem:
+                                    - generic: ★
+                                    - generic: 星形自定义符号
+                                  - listitem:
+                                    - generic: ○
+                                    - generic: 空心圆自定义符号
+                                - generic: 使用提示
+                                - generic: 选中文本后点击工具栏按钮即可应用格式；「插入」菜单可一键插入表格、引用、任务列表等块级内容；预览区右上角可将排版结果导出为高清 PNG 长图。
+                  - generic [aria-hidden]:
+                    - generic:
+                      - generic:
+                        - generic: 实时文本预览器
+                        - generic: 左侧编辑，右侧即时预览，所见即所得。
+                        - generic: Markdown 快捷解析
+                        - blockquote:
+                          - generic: 这是一段 Markdown 引用块：连续多行以 > 开头即可合并为引用样式，
+                          - generic: 行内仍可混用 加粗、颜色 等富文本标签。
+                        - generic:
+                          - table:
+                            - rowgroup:
+                              - row:
+                                - columnheader: 功能
+                                - columnheader: 语法
+                                - columnheader: 状态
+                            - rowgroup:
+                              - row:
+                                - cell: 引用块
+                                - cell: "> 文本"
+                                - cell: 已支持
+                              - row:
+                                - cell: 表格
+                                - cell: 竖线 + 分隔行
+                                - cell: 已支持
+                              - row:
+                                - cell: 代码块
+                                - cell: 三反引号围栏
+                                - cell: 已支持
+                        - generic:
+                          - generic: js
+                          - generic: "// 代码块原样保留换行与缩进，内部不解析标签 function greet(name) { const msg = '你好, ' + name; console.log(msg); }"
+                          - button: 复制
+                        - generic: 高级排版
+                        - list:
+                          - listitem:
+                            - generic: 加粗强调关键内容
+                          - listitem:
+                            - generic: 倾斜表达语气变化
+                          - listitem:
+                            - generic: H2O 与 X3 展示上下标
+                          - listitem:
+                            - generic: 宽字符间距效果
+                          - listitem:
+                            - generic: 更大的行距让段落呼吸
+                        - generic: 列表序号格式
+                        - list:
+                          - listitem:
+                            - generic: "1."
+                            - generic: 阿拉伯数字序号
+                          - listitem:
+                            - generic: i.
+                            - generic: 小写罗马数字
+                          - listitem:
+                            - generic: A.
+                            - generic: 大写字母序号
+                          - listitem:
+                            - generic: ★
+                            - generic: 星形自定义符号
+                          - listitem:
+                            - generic: ○
+                            - generic: 空心圆自定义符号
+                        - generic: 使用提示
+                        - generic: 选中文本后点击工具栏按钮即可应用格式；「插入」菜单可一键插入表格、引用、任务列表等块级内容；预览区右上角可将排版结果导出为高清 PNG 长图。
+    - region "Notifications alt+T":
+      - list:
+        - listitem:
+          - generic: 自定义模板加载失败，请稍后重试
+  - dialog [ref=e262]:
+    - generic [ref=e263]:
+      - heading "模版库" [level=2] [ref=e264]
+      - paragraph [ref=e269]: 应用预设模版快速起步，或将当前排版保存为自定义模板随时复用
+    - generic [ref=e270]:
+      - tablist [ref=e271]:
+        - tab "预设模板" [active] [selected] [ref=e272] [cursor=pointer]
+        - tab "自定义模板" [ref=e273] [cursor=pointer]
+      - tabpanel "预设模板" [ref=e274]:
+        - generic [ref=e275]:
+          - 'button "标题 + 正文 经典文章结构，标题、副标题与段落正文组合 # 文档标题 ## 概述 在此输入正文内容，支持<b>加粗</b>、<i>斜体</i>、<u>下划线</u>等格式。 ## 要点 1. 第一个要点 2. 第二个要点 3. 第三个要点" [ref=e276] [cursor=pointer]':
+            - generic [ref=e277]: 标题 + 正文
+            - generic [ref=e278]: 经典文章结构，标题、副标题与段落正文组合
+            - generic [ref=e279]: "# 文档标题 ## 概述 在此输入正文内容，支持<b>加粗</b>、<i>斜体</i>、<u>下划线</u>等格式。 ## 要点 1. 第一个要点 2. 第二个要点 3. 第三个要点"
+          - 'button "卡片布局 卡片容器，适合模块化展示产品或信息 ::: card 产品介绍 # 产品名称 简短描述产品特性，突出核心价值。 - 特性一 - 特性二 - 特性三 :::" [ref=e280] [cursor=pointer]':
+            - generic [ref=e281]: 卡片布局
+            - generic [ref=e282]: 卡片容器，适合模块化展示产品或信息
+            - generic [ref=e283]: "::: card 产品介绍 # 产品名称 简短描述产品特性，突出核心价值。 - 特性一 - 特性二 - 特性三 :::"
+          - 'button "多栏排版 双栏并排内容，适合对比或并列展示 # 多栏排版示例 ::: columns 左栏内容：在此输入第一栏的文字，支持富文本格式与列表。 右栏内容：在此输入第二栏的文字，与左栏并排展示。 :::" [ref=e284] [cursor=pointer]':
+            - generic [ref=e285]: 多栏排版
+            - generic [ref=e286]: 双栏并排内容，适合对比或并列展示
+            - generic [ref=e287]: "# 多栏排版示例 ::: columns 左栏内容：在此输入第一栏的文字，支持富文本格式与列表。 右栏内容：在此输入第二栏的文字，与左栏并排展示。 :::"
+          - 'button "公告通知 居中对齐的公告样式，突出重点信息 :center # 重要公告 :center 本通知适用于全体成员，请仔细阅读以下内容。 :center - 事项一 :center - 事项二 :center - 事项三" [ref=e288] [cursor=pointer]':
+            - generic [ref=e289]: 公告通知
+            - generic [ref=e290]: 居中对齐的公告样式，突出重点信息
+            - generic [ref=e291]: ":center # 重要公告 :center 本通知适用于全体成员，请仔细阅读以下内容。 :center - 事项一 :center - 事项二 :center - 事项三"
+          - 'button "功能清单 罗马数字与阿拉伯数字混合的有序列表 # 功能清单 i. 基础编辑 ii. 格式排版 iii. 预览导出 ## 详细说明 1. 支持撤销重做 2. 支持字体与背景设置 3. 支持预设模版库" [ref=e292] [cursor=pointer]':
+            - generic [ref=e293]: 功能清单
+            - generic [ref=e294]: 罗马数字与阿拉伯数字混合的有序列表
+            - generic [ref=e295]: "# 功能清单 i. 基础编辑 ii. 格式排版 iii. 预览导出 ## 详细说明 1. 支持撤销重做 2. 支持字体与背景设置 3. 支持预设模版库"
+          - 'button "富文本示例 展示加粗、颜色、字号、上下标等综合排版 # 富文本排版 这是一段<color=#3b82f6>蓝色</color>的文字，其中包含<b>加粗</b>与<i>斜体</i>。 化学式 H<sub>2</sub>O 与数学式 X<sup>2</sup> + Y<sup>2</sup>。 <spacing=3>宽间距文字效果</spacing>，<lh=2>更大行距让段落呼吸</lh>。" [ref=e296] [cursor=pointer]':
+            - generic [ref=e297]: 富文本示例
+            - generic [ref=e298]: 展示加粗、颜色、字号、上下标等综合排版
+            - generic [ref=e299]: "# 富文本排版 这是一段<color=#3b82f6>蓝色</color>的文字，其中包含<b>加粗</b>与<i>斜体</i>。 化学式 H<sub>2</sub>O 与数学式 X<sup>2</sup> + Y<sup>2</sup>。 <spacing=3>宽间距文字效果</spacing>，<lh=2>更大行距让段落呼吸</lh>。"
+    - button "Close" [ref=e300] [cursor=pointer]

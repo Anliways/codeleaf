@@ -1,4 +1,5 @@
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 const PageMeta = ({
@@ -15,11 +16,13 @@ const PageMeta = ({
 );
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => (
-  <HelmetProvider>
-    <TooltipProvider>
-      {children}
-    </TooltipProvider>
-  </HelmetProvider>
+  <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <HelmetProvider>
+      <TooltipProvider>
+        {children}
+      </TooltipProvider>
+    </HelmetProvider>
+  </ThemeProvider>
 );
 
 export default PageMeta;
