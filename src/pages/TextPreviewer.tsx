@@ -446,7 +446,7 @@ const TextPreviewer: React.FC = () => {
         <div className="flex min-w-0 items-center gap-3">
           <div className="flex min-w-0 flex-col leading-tight">
             <span className="truncate text-base font-semibold tracking-tight text-foreground md:text-lg">
-              代码叶 Codeleaf
+              编码叶 Codeleaf
             </span>
           </div>
         </div>
