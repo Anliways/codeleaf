@@ -30,6 +30,7 @@ export function useImageUpload({ onInsert }: UseImageUploadOptions) {
 
       setUploading(true);
       try {
+        if (!supabase) throw new Error('图片存储服务未配置');
         const compressed = await compressImageToFit(file);
         const path = `uploads/${Date.now()}_${sanitizeFileName(compressed.name)}`;
         const { error } = await supabase.storage

@@ -24,10 +24,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare site (use single-file build as index)
-        run: |
-          mkdir -p _site
-          cp archive/codeleaf-standalone.html _site/index.html
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # anon key 设计上即随前端公开分发；如需更换后端请在仓库 Secrets 中覆盖
+          VITE_SUPABASE_URL: https://backend.appmiaoda.com/projects/supabase357793932559560704
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoyMTA0NzMxOTIxLCJpc3MiOiJzdXBhYmFzZSIsInJvbGUiOiJhbm9uIiwic3ViIjoiYW5vbiJ9.Nv1B9ZT9IevzMuFrfxtLy8sJ_KP3BZ4VJN97oo3PDpg
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -35,7 +46,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment
