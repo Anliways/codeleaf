@@ -124,3 +124,63 @@ All colors MUST be HSL.
     font-family: var(--font-mono);
   }
 }
+
+/* ===== 自媒体编辑器（公众号排版基础样式） ===== */
+.wechat-editor {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #3f3f3f;
+  word-break: break-word;
+}
+.wechat-editor:focus {
+  outline: none;
+}
+.wechat-editor:empty::before {
+  content: attr(data-placeholder);
+  color: #bbb;
+  pointer-events: none;
+}
+.wechat-editor p {
+  margin: 0 0 16px;
+  line-height: 1.8;
+}
+.wechat-editor h1,
+.wechat-editor h2,
+.wechat-editor h3 {
+  margin: 24px 0 16px;
+  font-weight: 700;
+  color: #3f3f3f;
+}
+.wechat-editor h2 {
+  font-size: 18px;
+}
+.wechat-editor h3 {
+  font-size: 16px;
+}
+.wechat-editor ul,
+.wechat-editor ol {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}
+.wechat-editor li {
+  margin-bottom: 6px;
+  line-height: 1.8;
+}
+.wechat-editor blockquote {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-left: 3px solid #d9d9d9;
+  background: #fafafa;
+  color: #888;
+}
+.wechat-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.wechat-editor a {
+  color: #576b95;
+}
+.wechat-editor section {
+  max-width: 100%;
+}

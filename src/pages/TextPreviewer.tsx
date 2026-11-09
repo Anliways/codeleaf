@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import { EditorSection } from '@/components/editor/EditorSection';
 import { PreviewSection } from '@/components/preview/PreviewSection';
 import { ViewSwitcher } from '@/components/common/ViewSwitcher';
+import { AppNav } from '@/components/common/AppNav';
 import ThemeToggle from '@/components/common/ThemeToggle';
 import TemplateDialog from '@/components/editor/TemplateDialog';
 import { useHistory } from '@/hooks/useHistory';
@@ -479,12 +480,13 @@ const TextPreviewer: React.FC = () => {
   return (
     <div className="flex h-screen w-full flex-col overflow-hidden bg-background text-foreground">
       <header className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-3 md:px-6">
-        <div className="flex min-w-0 items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2 md:gap-3">
           <div className="flex min-w-0 flex-col leading-tight">
             <span className="truncate text-base font-semibold tracking-tight text-foreground md:text-lg">
               编码叶 Codeleaf
             </span>
           </div>
+          <AppNav />
         </div>
         <div className="flex shrink-0 items-center gap-1.5 md:gap-2">
           <ThemeToggle />

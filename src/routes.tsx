@@ -1,4 +1,5 @@
 import TextPreviewer from './pages/TextPreviewer';
+import MediaEditor from './pages/MediaEditor';
 import type { ReactNode } from 'react';
 
 export interface RouteConfig {
@@ -15,6 +16,12 @@ export const routes: RouteConfig[] = [
     name: '文本预览器',
     path: '/',
     element: <TextPreviewer />,
+    public: true,
+  },
+  {
+    name: '自媒体',
+    path: '/media',
+    element: <MediaEditor />,
     public: true,
   }
 ];
