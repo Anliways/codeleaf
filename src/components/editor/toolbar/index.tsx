@@ -115,7 +115,8 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
       <span className="shrink-0 text-xs font-medium uppercase tracking-wider text-muted-foreground">
         编辑区
       </span>
-      <div className="flex min-w-0 flex-nowrap items-center gap-1 md:flex-wrap">
+      {/* 移动端：单行横向滚动，所有按钮禁止收缩换行；md 起：自动换行铺开 */}
+      <div className="flex min-w-0 flex-nowrap items-center gap-1 [&>*]:shrink-0 md:flex-wrap">
         <ToolbarButton
           icon={<Undo2 className="h-3.5 w-3.5" />}
           tooltip="撤销（Ctrl/Cmd+Z）"
@@ -138,7 +139,7 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
                     <Heading className="h-3.5 w-3.5" />
                     标题
@@ -225,7 +226,7 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
 
         <div className="flex flex-wrap items-center">
           <ToolbarButton
-            icon={<span className="text-xs">清除格式</span>}
+            icon={<span className="whitespace-nowrap text-xs">清除格式</span>}
             tooltip="移除选中文本的所有标签格式"
             onClick={props.onClearFormat}
           />
@@ -300,7 +301,7 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
                     <Plus className="h-3.5 w-3.5" />
                     插入
@@ -336,7 +337,7 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
                     <ListOrdered className="h-3.5 w-3.5" />
                     列表
@@ -374,7 +375,7 @@ export const Toolbar: React.FC<ToolbarProps> = (props) => {
                   <TooltipTrigger asChild>
                     <button
                       type="button"
-                      className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                      className="inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                     >
                       <Type className="h-3.5 w-3.5" />
                       字体
@@ -481,7 +482,7 @@ const ValuePopover: React.FC<ValuePopoverProps> = ({
             <TooltipTrigger asChild>
               <button
                 type="button"
-                className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                className="inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
               >
                 {icon}
                 {label}

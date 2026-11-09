@@ -42,7 +42,7 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = ({
             title={title}
             disabled={disabled}
             onClick={onClick}
-            className={`${label ? 'h-7 gap-1.5 px-2 text-xs' : 'h-7 w-7 p-0'} ${active ? 'bg-secondary text-foreground' : ''} ${className}`}
+            className={`h-7 shrink-0 ${label ? 'gap-1.5 px-2 text-xs' : 'w-7 p-0'} ${active ? 'bg-secondary text-foreground' : ''} ${className}`}
           >
             {icon}
             {label ? <span className="hidden md:inline">{label}</span> : null}
