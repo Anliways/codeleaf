@@ -16,7 +16,7 @@ const PageMeta = ({
 );
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => (
-  <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+  <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false} disableTransitionOnChange>
     <HelmetProvider>
       <TooltipProvider>
         {children}

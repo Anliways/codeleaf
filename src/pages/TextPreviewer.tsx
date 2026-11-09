@@ -17,7 +17,6 @@ import { EditorSection } from '@/components/editor/EditorSection';
 import { PreviewSection } from '@/components/preview/PreviewSection';
 import { ViewSwitcher } from '@/components/common/ViewSwitcher';
 import { AppNav } from '@/components/common/AppNav';
-import ThemeToggle from '@/components/common/ThemeToggle';
 import TemplateDialog from '@/components/editor/TemplateDialog';
 import { useHistory } from '@/hooks/useHistory';
 import { useContainerScale } from '@/hooks/useContainerScale';
@@ -489,7 +488,6 @@ const TextPreviewer: React.FC = () => {
           <AppNav />
         </div>
         <div className="flex shrink-0 items-center gap-1.5 md:gap-2">
-          <ThemeToggle />
           <ViewSwitcher mode={viewMode} onSwitch={switchView} />
           <span className="whitespace-nowrap rounded-full bg-secondary px-2.5 py-1 font-mono text-xs font-medium text-secondary-foreground md:px-3">
             {charCount} 字

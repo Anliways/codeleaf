@@ -25,7 +25,6 @@ import {
 import { toast } from 'sonner';
 
 import { AppNav } from '@/components/common/AppNav';
-import ThemeToggle from '@/components/common/ThemeToggle';
 import PageMeta from '@/components/common/PageMeta';
 import { Button } from '@/components/ui/button';
 import {
@@ -285,7 +284,6 @@ const MediaEditor: React.FC = () => {
               '已保存'
             )}
           </span>
-          <ThemeToggle />
           <Button
             size="sm"
             className="h-8 gap-1.5 bg-[#07c160] px-2.5 text-xs text-white hover:bg-[#06ad56] md:px-3 md:text-sm"
