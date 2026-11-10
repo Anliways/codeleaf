@@ -4,7 +4,11 @@ node_modules/
 # 构建产物
 dist/
 .dist/
+dist-singlefile/
 *.local
+
+# 部署用站点镜像（npm run deploy 自动克隆，不入库）
+.site-cache/
 
 # 环境变量（含密钥，不入库）
 .env

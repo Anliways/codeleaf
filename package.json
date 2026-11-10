@@ -6,7 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "tsgo -p tsconfig.check.json; npx biome lint; .rules/check.sh;npx tailwindcss -i ./src/index.css -o /dev/null 2>&1 | grep -E '^(CssSyntaxError|Error):.*' || true;.rules/testBuild.sh"
+    "lint": "tsgo -p tsconfig.check.json; npx biome lint; .rules/check.sh;npx tailwindcss -i ./src/index.css -o /dev/null 2>&1 | grep -E '^(CssSyntaxError|Error):.*' || true;.rules/testBuild.sh",
+    "build:single": "vite build --config vite.singlefile.config.ts",
+    "deploy": "bash scripts/sync-site.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

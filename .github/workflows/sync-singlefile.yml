@@ -1,0 +1,63 @@
+name: Sync single-file build to anliways-site
+
+# 可选增强：配置仓库 Secret `SITE_SYNC_TOKEN`（对 anliways-site 有 contents 写权限的 PAT）后，
+# 每次 push 到 main 会自动把单文件产物同步到 www.anliways.com/codeleaf/（Vercel）。
+# 未配置该 Secret 时本工作流直接跳过，不影响 GitHub Pages 部署。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build single-file bundle
+        run: npx vite build --config vite.singlefile.config.ts
+        env:
+          VITE_SUPABASE_URL: https://backend.appmiaoda.com/projects/supabase357793932559560704
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoyMTA0NzMxOTIxLCJpc3MiOiJzdXBhYmFzZSIsInJvbGUiOiJhbm9uIiwic3ViIjoiYW5vbiJ9.Nv1B9ZT9IevzMuFrfxtLy8sJ_KP3BZ4VJN97oo3PDpg
+
+      - name: Push to anliways-site
+        env:
+          TOKEN: ${{ secrets.SITE_SYNC_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::notice::未配置 SITE_SYNC_TOKEN，跳过 Vercel 子站同步"
+            exit 0
+          fi
+          git clone --depth 1 "https://x-access-token:${TOKEN}@github.com/Anliways/anliways-site.git" "$RUNNER_TEMP/site"
+          node -e '
+            const fs = require("fs");
+            const dst = process.argv[1] + "/codeleaf/index.html";
+            const html = fs.readFileSync("dist-singlefile/index.html", "utf8")
+              .replace(/href="\.\/favicon\.png"/g, "href=\"/favicon.svg\"");
+            if (html.includes("代码叶")) { console.error("产物含旧名称「代码叶」"); process.exit(1); }
+            fs.writeFileSync(dst, html);
+            console.log("written:", dst, html.length, "bytes");
+          ' "$RUNNER_TEMP/site"
+          cd "$RUNNER_TEMP/site"
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "::notice::单文件无变化，无需同步"
+            exit 0
+          fi
+          git add codeleaf/index.html
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "chore(codeleaf): 自动同步单文件构建 ${GITHUB_SHA::7}"
+          git push origin HEAD:main
