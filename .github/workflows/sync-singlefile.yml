@@ -2,7 +2,7 @@ name: Sync single-file build to anliways-site
 
 # 可选增强：配置仓库 Secret `SITE_SYNC_TOKEN`（对 anliways-site 有 contents 写权限的 PAT）后，
 # 每次 push 到 main 会自动把单文件产物同步到 www.anliways.com/codeleaf/（Vercel）。
-# 未配置该 Secret 时本工作流直接跳过，不影响 GitHub Pages 部署。
+# 未配置该 Secret 时本工作流在第一步即退出，不消耗构建时间，也不影响 GitHub Pages 部署。
 
 on:
   push:
@@ -15,33 +15,44 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.SITE_SYNC_TOKEN }}
     steps:
+      - name: Check sync token
+        id: gate
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::notice::未配置 SITE_SYNC_TOKEN，跳过 Vercel 子站自动同步（不影响 GitHub Pages）"
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
+        if: steps.gate.outputs.enabled == 'true'
         uses: actions/checkout@v4
 
       - name: Setup Node
+        if: steps.gate.outputs.enabled == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
       - name: Install dependencies
+        if: steps.gate.outputs.enabled == 'true'
         run: npm ci
 
       - name: Build single-file bundle
+        if: steps.gate.outputs.enabled == 'true'
         run: npx vite build --config vite.singlefile.config.ts
         env:
           VITE_SUPABASE_URL: https://backend.appmiaoda.com/projects/supabase357793932559560704
           VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoyMTA0NzMxOTIxLCJpc3MiOiJzdXBhYmFzZSIsInJvbGUiOiJhbm9uIiwic3ViIjoiYW5vbiJ9.Nv1B9ZT9IevzMuFrfxtLy8sJ_KP3BZ4VJN97oo3PDpg
 
       - name: Push to anliways-site
-        env:
-          TOKEN: ${{ secrets.SITE_SYNC_TOKEN }}
+        if: steps.gate.outputs.enabled == 'true'
         run: |
-          if [ -z "$TOKEN" ]; then
-            echo "::notice::未配置 SITE_SYNC_TOKEN，跳过 Vercel 子站同步"
-            exit 0
-          fi
           git clone --depth 1 "https://x-access-token:${TOKEN}@github.com/Anliways/anliways-site.git" "$RUNNER_TEMP/site"
           node -e '
             const fs = require("fs");
