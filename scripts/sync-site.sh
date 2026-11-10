@@ -96,10 +96,12 @@ check_pages() {
     js="$(printf '%s' "$html" | grep -o 'assets/index-[^"]*\.js' | head -1 || true)"
     if [ -n "$js" ]; then
       body="$(curl -fsS --max-time 20 "${url}${js}" 2>/dev/null || true)"
-      if printf '%s' "$body" | grep -q '自媒体'; then
-        ok "GitHub Pages 已包含「自媒体」入口（${js}）"
-        return 0
-      fi
+      case "$body" in
+        *自媒体*)
+          ok "GitHub Pages 已包含「自媒体」入口（${js}）"
+          return 0
+          ;;
+      esac
     fi
     sleep 5
   done
@@ -112,10 +114,12 @@ check_single() {
   local url="$1" body
   for _ in $(seq 1 18); do
     body="$(curl -fsS --max-time 15 "$url?cb=$(date +%s)" 2>/dev/null || true)"
-    if printf '%s' "$body" | grep -q '自媒体'; then
-      ok "www.anliways.com/codeleaf 已包含「自媒体」入口"
-      return 0
-    fi
+    case "$body" in
+      *自媒体*)
+        ok "www.anliways.com/codeleaf 已包含「自媒体」入口"
+        return 0
+        ;;
+    esac
     sleep 5
   done
   warn "www.anliways.com/codeleaf 尚未生效（Vercel 构建通常需 30~60 秒）"
