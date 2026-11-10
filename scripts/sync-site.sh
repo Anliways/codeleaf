@@ -86,21 +86,43 @@ else
 fi
 
 # ---------- 5. 线上校验 ----------
-say "5/5 线上校验（最多等待 60 秒生效）"
-check() {
-  local url="$1" name="$2" body
-  for i in $(seq 1 12); do
-    body="$(curl -fsS --max-time 10 "$url?cb=$(date +%s)" 2>/dev/null || true)"
+say "5/5 线上校验（最多等待 90 秒生效）"
+
+# GitHub Pages：HTML 只引用外链 JS，需进一步检查 bundle 内容
+check_pages() {
+  local url="$1" html js body
+  for _ in $(seq 1 18); do
+    html="$(curl -fsS --max-time 10 "$url?cb=$(date +%s)" 2>/dev/null || true)"
+    js="$(printf '%s' "$html" | grep -o 'assets/index-[^"]*\.js' | head -1 || true)"
+    if [ -n "$js" ]; then
+      body="$(curl -fsS --max-time 20 "${url}${js}" 2>/dev/null || true)"
+      if printf '%s' "$body" | grep -q '自媒体'; then
+        ok "GitHub Pages 已包含「自媒体」入口（${js}）"
+        return 0
+      fi
+    fi
+    sleep 5
+  done
+  warn "GitHub Pages 尚未生效（部署通常需 1~2 分钟，可稍后手动确认）"
+  return 0
+}
+
+# Vercel 子目录：单文件产物，正文内直接包含「自媒体」
+check_single() {
+  local url="$1" body
+  for _ in $(seq 1 18); do
+    body="$(curl -fsS --max-time 15 "$url?cb=$(date +%s)" 2>/dev/null || true)"
     if printf '%s' "$body" | grep -q '自媒体'; then
-      ok "$name 已包含「自媒体」入口"
+      ok "www.anliways.com/codeleaf 已包含「自媒体」入口"
       return 0
     fi
     sleep 5
   done
-  warn "$name 尚未生效（可稍后手动刷新确认）"
+  warn "www.anliways.com/codeleaf 尚未生效（Vercel 构建通常需 30~60 秒）"
   return 0
 }
-check "$PAGES_URL" "GitHub Pages"
-check "$SITE_URL" "www.anliways.com/codeleaf"
+
+check_pages "$PAGES_URL"
+check_single "$SITE_URL"
 
 printf '\n\033[1;32m完成。\033[0m 两个访问地址：\n  %s\n  %s\n' "$PAGES_URL" "$SITE_URL"
