@@ -85,6 +85,21 @@ npm run lint       # type check + Biome lint + ast-grep rules + build check
 
 The repository ships with a GitHub Actions workflow (`.github/workflows/deploy-pages.yml`) that publishes the site to **GitHub Pages** automatically on every push to `main`. No extra configuration is needed beyond enabling Pages from GitHub Actions in the repository settings.
 
+### One-command dual deployment
+
+The project is published to two places: `anliways.github.io/codeleaf/` (GitHub Pages, built from source) and `www.anliways.com/codeleaf/` (Vercel, served as a self-contained single-file build from the `Anliways/anliways-site` repository).
+
+```bash
+npm run deploy            # build -> push source -> sync single-file -> verify both URLs
+npm run deploy -- --no-push   # skip pushing the source repository
+```
+
+The script (`scripts/sync-site.sh`) builds `dist/`, generates `dist-singlefile/index.html` via `vite.singlefile.config.ts`, commits/pushes this repository, then overwrites `codeleaf/index.html` in `anliways-site` and verifies both URLs contain the expected content.
+
+### Optional: fully automatic sync
+
+Add a repository secret `SITE_SYNC_TOKEN` (fine-grained PAT with *Contents: read and write* on `Anliways/anliways-site`). The workflow `.github/workflows/sync-singlefile.yml` will then push the single-file build to the Vercel site on every push to `main`. Without the secret the workflow skips silently, so it is safe to leave unconfigured.
+
 ## 📁 Project Structure
 
 ```
@@ -199,6 +214,21 @@ npm run lint       # 类型检查 + Biome lint + ast-grep 规则 + 构建校验
 ## 📦 部署
 
 仓库内置 GitHub Actions 工作流（`.github/workflows/deploy-pages.yml`），每次向 `main` 分支推送都会自动发布到 **GitHub Pages**。只需在仓库设置中将 Pages 来源启用为 GitHub Actions，无需其他配置。
+
+### 一条命令双站发布
+
+本项目发布到两个位置：`anliways.github.io/codeleaf/`（GitHub Pages，源码构建）与 `www.anliways.com/codeleaf/`（Vercel，托管 `Anliways/anliways-site` 仓库中的自包含单文件产物）。
+
+```bash
+npm run deploy              # 构建 → 推送源码 → 同步单文件 → 校验两个线上地址
+npm run deploy -- --no-push # 只构建与同步单文件，不推送源码仓库
+```
+
+脚本 `scripts/sync-site.sh` 依次完成：构建 `dist/` → 用 `vite.singlefile.config.ts` 生成 `dist-singlefile/index.html` → 提交并推送本仓库 → 覆盖 `anliways-site/codeleaf/index.html` 并推送 → 校验两个线上地址均已包含最新内容。
+
+### 可选：完全自动同步
+
+在仓库 Secrets 中添加 `SITE_SYNC_TOKEN`（对 `Anliways/anliways-site` 具有 **Contents: read and write** 权限的细粒度 PAT）。此后每次推送 `main`，工作流 `.github/workflows/sync-singlefile.yml` 会自动把单文件产物同步到 Vercel 子站。未配置该 Secret 时工作流会静默跳过，不影响 GitHub Pages 部署。
 
 ## 📁 项目结构
 
